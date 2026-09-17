@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming - Sudhir Study Hub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        nav {
+            background: #111827;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .card {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #2563eb;
+        }
+
+        pre {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111827;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>💻 C Programming</h1>
+        <p>Sudhir Study Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="maths.html">Mathematics</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>1. Even or Odd</h2>
+            <p>Check whether a number is even or odd.</p>
+
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int n;
+
+    printf("Enter a number: ");
+    scanf("%d", &amp;n);
+
+    if(n % 2 == 0)
+        printf("Even");
+    else
+        printf("Odd");
+
+    return 0;
+}
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>2. Day Number to Day Name</h2>
+            <p>Enter a number from 1 to 7 and display the day.</p>
+
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int day;
+
+    printf("Enter day number: ");
+    scanf("%d", &amp;day);
+
+    switch(day) {
+        case 1: printf("Monday"); break;
+        case 2: printf("Tuesday"); break;
+        case 3: printf("Wednesday"); break;
+        case 4: printf("Thursday"); break;
+        case 5: printf("Friday"); break;
+        case 6: printf("Saturday"); break;
+        case 7: printf("Sunday"); break;
+        default: printf("Invalid day number");
+    }
+
+    return 0;
+}
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>3. Alphabet Check</h2>
+            <p>Check whether the entered character is an alphabet.</p>
+
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    char ch;
+
+    printf("Enter a character: ");
+    scanf(" %c", &amp;ch);
+
+    if((ch &gt;= 'A' &amp;&amp; ch &lt;= 'Z') ||
+       (ch &gt;= 'a' &amp;&amp; ch &lt;= 'z'))
+        printf("It is an alphabet");
+    else
+        printf("It is not an alphabet");
+
+    return 0;
+}
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>4. Leap Year</h2>
+            <p>Check whether a year is a leap year.</p>
+
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int year;
+
+    printf("Enter year: ");
+    scanf("%d", &amp;year);
+
+    if(year % 400 == 0 ||
+       (year % 4 == 0 &amp;&amp; year % 100 != 0))
+        printf("Leap Year");
+    else
+        printf("Not a Leap Year");
+
+    return 0;
+}
+        </pre>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Sudhir Study Hub</p>
+        <p>Learn • Practice • Grow</p>
+    </footer>
+
+</body>
+
+</html>

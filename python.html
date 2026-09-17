@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python - Sudhir Study Hub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        nav {
+            background: #111827;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .card {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #2563eb;
+        }
+
+        pre {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111827;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🐍 Python Programming</h1>
+        <p>Sudhir Study Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="maths.html">Mathematics</a>
+        <a href="c-programming.html">C Programming</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>1. Hello World</h2>
+            <p>Python का सबसे basic program.</p>
+
+            <pre>
+print("Hello World")
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>2. Add Two Numbers</h2>
+
+            <pre>
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+
+sum = a + b
+
+print("Sum =", sum)
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>3. Even or Odd</h2>
+
+            <pre>
+n = int(input("Enter a number: "))
+
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>4. Largest of Two Numbers</h2>
+
+            <pre>
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+
+if a > b:
+    print("Largest =", a)
+else:
+    print("Largest =", b)
+        </pre>
+        </div>
+
+        <div class="card">
+            <h2>5. Check Positive, Negative or Zero</h2>
+
+            <pre>
+n = int(input("Enter a number: "))
+
+if n > 0:
+    print("Positive")
+elif n < 0:
+    print("Negative")
+else:
+    print("Zero")
+        </pre>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Sudhir Study Hub</p>
+        <p>Learn • Practice • Grow</p>
+    </footer>
+
+</body>
+
+</html>
