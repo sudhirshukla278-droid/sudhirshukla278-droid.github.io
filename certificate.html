@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Certificate - Sudhir Study Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Georgia, serif;
+            background: #eef2f7;
+            color: #12345b;
+        }
+
+        .top {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .top h1 {
+            margin: 0;
+            color: #123f73;
+        }
+
+        .top p {
+            margin: 5px;
+        }
+
+        #countdownBox {
+            background: white;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
+        }
+
+        #countdown {
+            font-size: 32px;
+            font-weight: bold;
+            color: #c89418;
+        }
+
+        #certificateArea {
+            display: none;
+        }
+
+        .certificate {
+            width: 1200px;
+            min-height: 850px;
+            margin: 20px auto;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #d9a526;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, .2);
+            padding: 45px 60px;
+        }
+
+        /* Decorative corners */
+
+        .certificate:before {
+            content: "";
+            position: absolute;
+            left: -100px;
+            top: -100px;
+            width: 300px;
+            height: 300px;
+            background: #073b72;
+            transform: rotate(45deg);
+        }
+
+        .certificate:after {
+            content: "";
+            position: absolute;
+            right: -100px;
+            bottom: -100px;
+            width: 300px;
+            height: 300px;
+            background: #073b72;
+            transform: rotate(45deg);
+        }
+
+        .gold-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 18px;
+            height: 3px;
+            background: #d9a526;
+        }
+
+        .logo {
+            position: absolute;
+            left: 55px;
+            top: 45px;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #082f5d;
+            border: 5px solid #d9a526;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.2;
+            z-index: 2;
+        }
+
+        .logo small {
+            display: block;
+            color: #f4c438;
+            font-size: 15px;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 46px;
+            letter-spacing: 2px;
+            color: #082f5d;
+        }
+
+        .tagline {
+            font-size: 21px;
+            color: #153f6e;
+            margin-top: 8px;
+        }
+
+        .competition {
+            display: inline-block;
+            margin-top: 18px;
+            background: #0a477f;
+            color: white;
+            padding: 10px 35px;
+            border-radius: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .title h2 {
+            margin: 0;
+            font-size: 78px;
+            font-style: italic;
+            color: #d49b19;
+            font-weight: normal;
+        }
+
+        .title h3 {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            letter-spacing: 3px;
+        }
+
+        .certify {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 19px;
+        }
+
+        .student {
+            text-align: center;
+            font-size: 48px;
+            font-style: italic;
+            font-weight: bold;
+            color: #073b72;
+            border-bottom: 2px solid #073b72;
+            width: 70%;
+            margin: 10px auto;
+            padding-bottom: 5px;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.6;
+            max-width: 950px;
+            margin: 15px auto;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border: 1px solid #b9d0e6;
+            background: #f7fbff;
+            border-radius: 15px;
+            margin-top: 25px;
+            padding: 15px 5px;
+        }
+
+        .detail {
+            text-align: center;
+            border-right: 1px solid #b9d0e6;
+            padding: 5px;
+        }
+
+        .detail:last-child {
+            border-right: none;
+        }
+
+        .detail-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .detail-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #092f5a;
+        }
+
+        .appreciation {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-top: 30px;
+            padding: 0 50px;
+        }
+
+        .date {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .signature {
+            text-align: center;
+        }
+
+        .signature-name {
+            font-family: "Brush Script MT", cursive;
+            font-size: 38px;
+            color: #073b72;
+            border-bottom: 2px solid #073b72;
+            padding: 0 25px;
+        }
+
+        .signature-title {
+            margin-top: 8px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .qr {
+            text-align: center;
+        }
+
+        #qrcode {
+            width: 110px;
+            height: 110px;
+            margin: auto;
+        }
+
+        .qr p {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: #073b72;
+            color: white;
+            padding: 12px 35px;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 25px;
+        }
+
+        button {
+            padding: 13px 25px;
+            margin: 5px;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .download {
+            background: #0a477f;
+            color: white;
+        }
+
+        .print {
+            background: #d49b19;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media(max-width:1250px) {
+
+            .certificate {
+                transform-origin: top left;
+                transform: scale(.75);
+                margin-bottom: -200px;
+            }
+        }
+
+        @media(max-width:800px) {
+
+            body {
+                padding: 5px;
+            }
+
+            .certificate {
+                transform: scale(.48);
+                margin-left: 0;
+                margin-bottom: -430px;
+            }
+
+            .details {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top">
+        <h1>🎓 Sudhir Study Hub</h1>
+        <p>Certificate Portal</p>
+    </div>
+
+    <!-- COUNTDOWN -->
+
+    <div id="countdownBox">
+
+        <h2>📜 Certificate</h2>
+
+        <p>
+            Your certificate will be available on
+        </p>
+
+        <h3>4 October 2026 — 3:10 PM</h3>
+
+        <p>Certificate unlocks in:</p>
+
+        <div id="countdown">
+            00:00:00
+        </div>
+
+    </div>
+
+
+    <!-- CERTIFICATE -->
+
+    <div id="certificateArea">
+
+        <div id="certificate" class="certificate">
+
+            <div class="gold-line"></div>
+
+            <div class="logo">
+                📖<br>
+                SUDHIR<br>
+                <small>STUDY HUB</small>
+            </div>
+
+
+            <div class="header">
+
+                <h1>SUDHIR STUDY HUB</h1>
+
+                <div class="tagline">
+                    Learn • Practice • Grow
+                </div>
+
+                <div class="competition">
+                    ONLINE OBJECTIVE QUESTION COMPETITION
+                </div>
+
+            </div>
+
+
+            <div class="title">
+
+                <h2>Certificate</h2>
+
+                <h3>OF PARTICIPATION</h3>
+
+            </div>
+
+
+            <div class="certify">
+                THIS IS TO CERTIFY THAT
+            </div>
+
+
+            <div id="studentName" class="student">
+                Student Name
+            </div>
+
+
+            <div class="message">
+
+                has successfully participated in the
+                <b>Online Objective Question Competition</b>
+                organized by <b>Sudhir Study Hub</b>
+                and secured the following result.
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        👤 PARTICIPANT ID
+                    </div>
+
+                    <div id="participantId" class="detail-value">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        📅 TEST DATE
+                    </div>
+
+                    <div class="detail-value">
+                        4 October 2026
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        🏆 TOTAL SCORE
+                    </div>
+
+                    <div id="score" class="detail-value">
+                        0 / 200
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        ✅ CORRECT
+                    </div>
+
+                    <div id="correct" class="detail-value">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        ❌ WRONG
+                    </div>
+
+                    <div id="wrong" class="detail-value">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+                        ⭕ UNATTEMPTED
+                    </div>
+
+                    <div id="unattempted" class="detail-value">
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="appreciation">
+
+                Your dedication and hard work are truly appreciated.<br>
+                <b>Keep learning, keep growing!</b>
+
+            </div>
+
+
+            <div class="bottom">
+
+                <div class="date">
+
+                    4 October 2026
+                    <hr>
+                    Date
+
+                </div>
+
+
+                <div class="signature">
+
+                    <div class="signature-name">
+                        Sudhir Kumar Shukla
+                    </div>
+
+                    <div class="signature-title">
+                        Sudhir Kumar Shukla<br>
+                        Founder & Director<br>
+                        Sudhir Study Hub
+                    </div>
+
+                </div>
+
+
+                <div class="qr">
+
+                    <div id="qrcode"></div>
+
+                    <p>
+                        Scan to View<br>
+                        Your Certificate
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer">
+                Better Education | Brighter Future
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button class="download" onclick="downloadCertificate()">
+                📥 Download Certificate
+            </button>
+
+            <button class="print" onclick="window.print()">
+                🖨️ Print / Save PDF
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- QR CODE LIBRARY -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- IMAGE DOWNLOAD LIBRARY -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    <script>
+
+        /* ==========================
+           STUDENT DATA
+        ========================== */
+
+        var studentName =
+            localStorage.getItem("studentName") ||
+            "Student";
+
+        var participantId =
+            localStorage.getItem("participantId") ||
+            "SSH0000";
+
+        var score =
+            localStorage.getItem("studentScore") ||
+            "0";
+
+        var correct =
+            localStorage.getItem("correctAnswers") ||
+            "0";
+
+        var wrong =
+            localStorage.getItem("wrongAnswers") ||
+            "0";
+
+        var unattempted =
+            50 - Number(correct) - Number(wrong);
+
+
+        /* ==========================
+           SHOW DATA
+        ========================== */
+
+        document.getElementById("studentName")
+            .innerHTML = studentName;
+
+        document.getElementById("participantId")
+            .innerHTML = participantId;
+
+        document.getElementById("score")
+            .innerHTML = score + " / 200";
+
+        document.getElementById("correct")
+            .innerHTML = correct;
+
+        document.getElementById("wrong")
+            .innerHTML = wrong;
+
+        document.getElementById("unattempted")
+            .innerHTML =
+            unattempted;
+
+
+        /* ==========================
+           QR CODE
+        ========================== */
+
+        function createQR() {
+
+            var baseURL =
+                window.location.origin +
+                window.location.pathname;
+
+            var qrData =
+                baseURL +
+                "?pid=" +
+                encodeURIComponent(participantId) +
+                "&name=" +
+                encodeURIComponent(studentName) +
+                "&score=" +
+                encodeURIComponent(score);
+
+            document.getElementById("qrcode")
+                .innerHTML = "";
+
+            new QRCode(
+                document.getElementById("qrcode"),
+                {
+                    text: qrData,
+                    width: 110,
+                    height: 110
+                }
+            );
+        }
+
+        createQR();
+
+
+        /* ==========================
+           CERTIFICATE DATE
+        ========================== */
+
+        var CERTIFICATE_TIME =
+            new Date(
+                "2026-10-04T15:10:00+05:30"
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            var now =
+                new Date().getTime();
+
+            var difference =
+                CERTIFICATE_TIME - now;
+
+
+            if (difference <= 0) {
+
+                document.getElementById(
+                    "countdownBox"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "certificateArea"
+                ).style.display = "block";
+
+                return;
+
+            }
+
+
+            var hours =
+                Math.floor(
+                    difference / (1000 * 60 * 60)
+                );
+
+            var minutes =
+                Math.floor(
+                    (difference %
+                        (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+            var seconds =
+                Math.floor(
+                    (difference %
+                        (1000 * 60)) /
+                    1000
+                );
+
+
+            document.getElementById(
+                "countdown"
+            ).innerHTML =
+
+                String(hours).padStart(2, "0")
+                + ":"
+                +
+                String(minutes).padStart(2, "0")
+                + ":"
+                +
+                String(seconds).padStart(2, "0");
+        }
+
+
+        updateCountdown();
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+
+        /* ==========================
+           DOWNLOAD CERTIFICATE
+        ========================== */
+
+        function downloadCertificate() {
+
+            var certificate =
+                document.getElementById(
+                    "certificate"
+                );
+
+
+            html2canvas(
+                certificate,
+                {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: "#ffffff"
+                }
+            ).then(function (canvas) {
+
+                var link =
+                    document.createElement("a");
+
+                link.download =
+                    "Sudhir_Study_Hub_Certificate_"
+                    +
+                    participantId
+                    +
+                    ".png";
+
+                link.href =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                link.click();
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
