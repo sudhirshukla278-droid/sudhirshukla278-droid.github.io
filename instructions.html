@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sudhir Study Hub - Instructions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0757a0;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #0757a0;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+
+        .info {
+            background: #eef7ff;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .marks {
+            background: #fff7d6;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        .camera-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eef9f1;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .camera-section h2 {
+            margin-top: 0;
+        }
+
+        .camera-note {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        video {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 15px;
+            border-radius: 15px;
+            background: #111;
+            display: none;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 14px 22px;
+            margin: 10px 5px;
+            background: #0757a0;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #043e72;
+        }
+
+        #continueBtn {
+            display: none;
+            background: #198754;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .warning {
+            background: #ffe8e8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎓 Sudhir Study Hub</h1>
+
+        <div class="subtitle">
+            Online Objective Question Competition
+        </div>
+
+
+        <!-- Competition Details -->
+
+        <h2>📅 Competition Details</h2>
+
+        <div class="info">
+
+            <b>Competition Date:</b> 4 October 2026<br>
+
+            <b>Registration / Entry:</b> 1:00 PM<br>
+
+            <b>Test Start:</b> 1:10 PM<br>
+
+            <b>Test Duration:</b> 60 Minutes<br>
+
+            <b>Test End:</b> 2:10 PM<br>
+
+            <b>Total Questions:</b> 50 MCQs<br>
+
+            <b>Maximum Marks:</b> 200
+
+        </div>
+
+
+        <!-- English -->
+
+        <h2>🇬🇧 Instructions – English</h2>
+
+        <ul>
+
+            <li>There will be 50 multiple-choice questions.</li>
+
+            <li>Each correct answer gives <b>+4 marks</b>.</li>
+
+            <li>Each incorrect answer gives <b>-1 mark</b>.</li>
+
+            <li>An unattempted question gives <b>0 marks</b>.</li>
+
+            <li>You can use <b>Previous</b>, <b>Save & Next</b>,
+                <b>Mark for Review</b> and <b>Clear Response</b>.
+            </li>
+
+            <li>You can move between questions using the question palette.</li>
+
+            <li>Questions marked for review will also be submitted.</li>
+
+            <li>The test will automatically submit after 60 minutes.</li>
+
+            <li>Do not refresh or close the test page during the examination.</li>
+
+        </ul>
+
+
+        <!-- Hindi -->
+
+        <h2>🇮🇳 निर्देश – हिंदी</h2>
+
+        <ul>
+
+            <li>परीक्षा में कुल 50 बहुविकल्पीय प्रश्न होंगे।</li>
+
+            <li>सही उत्तर के लिए <b>+4 अंक</b> मिलेंगे।</li>
+
+            <li>गलत उत्तर के लिए <b>-1 अंक</b> मिलेगा।</li>
+
+            <li>छोड़े गए प्रश्न के लिए <b>0 अंक</b> मिलेगा।</li>
+
+            <li>आप <b>Previous</b>, <b>Save & Next</b>,
+                <b>Mark for Review</b> और <b>Clear Response</b>
+                का उपयोग कर सकते हैं।
+            </li>
+
+            <li>Question Palette से किसी भी प्रश्न पर जा सकते हैं।</li>
+
+            <li>Mark for Review किए गए प्रश्न भी submit होंगे।</li>
+
+            <li>60 मिनट पूरे होने पर परीक्षा अपने आप submit हो जाएगी।</li>
+
+            <li>परीक्षा के दौरान page को refresh या बंद न करें।</li>
+
+        </ul>
+
+
+        <!-- Marking -->
+
+        <h2>⭐ Marking Scheme</h2>
+
+        <div class="marks">
+
+            ✅ Correct Answer = <b>+4</b><br>
+
+            ❌ Wrong Answer = <b>-1</b><br>
+
+            ⚪ Unattempted = <b>0</b><br>
+
+            🏆 Maximum Marks = <b>200</b>
+
+        </div>
+
+
+        <!-- Camera -->
+
+        <div class="camera-section">
+
+            <h2>📷 Camera Check / कैमरा जाँच</h2>
+
+            <p class="camera-note">
+
+                Camera check के लिए आपकी अनुमति आवश्यक है।<br>
+
+                Camera बिना आपकी permission के चालू नहीं होगा।
+
+            </p>
+
+            <p class="camera-note">
+
+                <b>English:</b> Camera access is used only for the
+                visible camera check on this page. No video is recorded
+                or stored by this demo.
+
+            </p>
+
+
+            <button id="cameraBtn" onclick="startCamera()">
+
+                📷 Allow Camera & Check
+
+            </button>
+
+
+            <br>
+
+
+            <video id="camera" autoplay playsinline></video>
+
+
+            <div id="status"></div>
+
+
+            <button id="continueBtn" onclick="continueToTest()">
+
+                ▶️ Continue to Test
+
+            </button>
+
+
+            <div class="warning">
+
+                ⚠️ Camera permission is required for this demo camera check.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let cameraStream = null;
+
+
+        // Camera Start
+
+        function startCamera() {
+
+            const status = document.getElementById("status");
+
+            const video = document.getElementById("camera");
+
+            const cameraBtn = document.getElementById("cameraBtn");
+
+            const continueBtn = document.getElementById("continueBtn");
+
+
+            if (!navigator.mediaDevices ||
+                !navigator.mediaDevices.getUserMedia) {
+
+                status.style.color = "red";
+
+                status.innerHTML =
+                    "❌ Camera is not supported by this browser.";
+
+                return;
+            }
+
+
+            status.style.color = "#333";
+
+            status.innerHTML =
+                "⏳ Requesting camera permission...";
+
+
+            navigator.mediaDevices.getUserMedia({
+
+                video: true,
+
+                audio: false
+
+            })
+
+                .then(function (stream) {
+
+                    cameraStream = stream;
+
+                    video.srcObject = stream;
+
+                    video.style.display = "block";
+
+
+                    status.style.color = "green";
+
+                    status.innerHTML =
+                        "✅ Camera permission successful!";
+
+
+                    cameraBtn.innerHTML =
+                        "✅ Camera Checked";
+
+
+                    continueBtn.style.display = "inline-block";
+
+                })
+
+                .catch(function (error) {
+
+                    status.style.color = "red";
+
+                    status.innerHTML =
+                        "❌ Camera permission denied. Please allow camera access.";
+
+                });
+
+        }
+
+
+        // Continue
+
+        function continueToTest() {
+
+            if (cameraStream) {
+
+                cameraStream.getTracks().forEach(function (track) {
+
+                    track.stop();
+
+                });
+
+            }
+
+
+            window.location.href = "test.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
