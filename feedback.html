@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sudhir Study Hub - Certificate</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef4ff;
+        }
+
+        .header {
+            background: #1769aa;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .waiting {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #bbb;
+        }
+
+        .waiting h2 {
+            color: #1769aa;
+        }
+
+        .countdown {
+            font-size: 55px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin: 30px 0;
+        }
+
+        .certificate-box {
+            display: none;
+        }
+
+        .certificate {
+            background: #fffdf2;
+            border: 12px double #1769aa;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 5px 20px #aaa;
+        }
+
+        .trophy {
+            font-size: 55px;
+        }
+
+        .certificate h1 {
+            color: #1769aa;
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .certificate h2 {
+            font-size: 25px;
+        }
+
+        .student-name {
+            display: inline-block;
+            font-size: 34px;
+            font-weight: bold;
+            margin: 25px;
+            padding: 0 40px 10px;
+            border-bottom: 2px solid #1769aa;
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            background: #1769aa;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d4f80;
+        }
+
+        @media(max-width:600px) {
+
+            .certificate {
+                padding: 25px 12px;
+            }
+
+            .certificate h1 {
+                font-size: 28px;
+            }
+
+            .student-name {
+                font-size: 25px;
+                padding: 0 15px 8px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            .header,
+            .buttons {
+                display: none;
+            }
+
+            .container {
+                margin: 0;
+                padding: 0;
+            }
+
+            .certificate {
+                box-shadow: none;
+                min-height: 90vh;
+            }
+
+            .certificate-box {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎓 Sudhir Study Hub</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- WAITING SCREEN -->
+
+        <div class="waiting" id="waiting">
+
+            <h2>🏆 Certificate</h2>
+
+            <p>
+                Your certificate will be available
+                <b>1 hour after the test ends.</b>
+            </p>
+
+            <p>Certificate Available In:</p>
+
+            <div class="countdown" id="countdown">
+                60:00
+            </div>
+
+            <p>
+                Please wait until the countdown is complete.
+            </p>
+
+        </div>
+
+
+        <!-- CERTIFICATE -->
+
+        <div class="certificate-box" id="certificateBox">
+
+            <div class="certificate">
+
+                <div class="trophy">🏆</div>
+
+                <h1>CERTIFICATE</h1>
+
+                <h2>OF PARTICIPATION</h2>
+
+                <p>
+                    This certificate is proudly presented to
+                </p>
+
+                <div class="student-name" id="studentName">
+                    Participant
+                </div>
+
+                <p>
+                    for successfully participating in
+                </p>
+
+                <h2>
+                    Sudhir Study Hub<br>
+                    Online Objective Question Competition
+                </h2>
+
+                <p>
+                    The participant successfully completed
+                    the online objective question competition.
+                </p>
+
+                <div class="score" id="studentScore">
+                    Score: --
+                </div>
+
+                <p>
+                    Competition Date:
+                    <b>4 October 2026</b>
+                </p>
+
+                <div class="footer">
+
+                    <div>
+                        Sudhir Study Hub
+                    </div>
+
+                    <div>
+                        4 October 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button onclick="window.print()">
+                    🖨️ Print / Save Certificate
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ==========================================
+           1 HOUR COUNTDOWN
+        ========================================== */
+
+        var secondsLeft = 60 * 60;
+
+
+        /* ==========================================
+           UPDATE TIMER
+        ========================================== */
+
+        function updateCountdown() {
+
+            var minutes = Math.floor(secondsLeft / 60);
+
+            var seconds = secondsLeft % 60;
+
+
+            document.getElementById("countdown").innerHTML =
+                String(minutes).padStart(2, "0")
+                + ":"
+                + String(seconds).padStart(2, "0");
+
+
+            if (secondsLeft <= 0) {
+
+                showCertificate();
+
+                return;
+            }
+
+
+            secondsLeft--;
+
+        }
+
+
+        /* ==========================================
+           SHOW CERTIFICATE
+        ========================================== */
+
+        function showCertificate() {
+
+            document.getElementById("waiting").style.display =
+                "none";
+
+            document.getElementById("certificateBox").style.display =
+                "block";
+
+        }
+
+
+        /* Start countdown */
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000);
+
+
+        /* ==========================================
+           STUDENT NAME & SCORE
+        ========================================== */
+
+        var studentName =
+            localStorage.getItem("studentName");
+
+        var studentScore =
+            localStorage.getItem("studentScore");
+
+
+        if (studentName) {
+
+            document.getElementById("studentName").innerHTML =
+                studentName;
+
+        }
+
+
+        if (studentScore) {
+
+            document.getElementById("studentScore").innerHTML =
+                "Score: "
