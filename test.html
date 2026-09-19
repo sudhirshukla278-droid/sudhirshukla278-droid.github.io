@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudhir Study Hub - Online Competition</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            color: #222;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #673ab7, #2196f3);
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .topbar {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, .1);
+        }
+
+        .timer {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .question-box {
+            background: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, .1);
+        }
+
+        .subject {
+            display: inline-block;
+            background: #673ab7;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: block;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .option:hover {
+            background: #eeeeee;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .prev {
+            background: #607d8b;
+            color: white;
+        }
+
+        .next {
+            background: #2196f3;
+            color: white;
+        }
+
+        .review {
+            background: #ffb300;
+            color: white;
+        }
+
+        .clear {
+            background: #e53935;
+            color: white;
+        }
+
+        .submit {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .palette {
+            background: white;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, .1);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .qbtn {
+            height: 38px;
+            border: 1px solid #999;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .answered {
+            background: #4caf50;
+            color: white;
+        }
+
+        .reviewed {
+            background: #ffc107;
+            color: #222;
+        }
+
+        .answeredReview {
+            background: #9c27b0;
+            color: white;
+        }
+
+        .notanswered {
+            background: white;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .legend span {
+            padding: 7px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .l-green {
+            background: #4caf50;
+            color: white;
+        }
+
+        .l-white {
+            background: white;
+            border: 1px solid #aaa;
+        }
+
+        .l-yellow {
+            background: #ffc107;
+        }
+
+        .l-purple {
+            background: #9c27b0;
+            color: white;
+        }
+
+        .locked {
+            text-align: center;
+            background: white;
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, .12);
+        }
+
+        .locked h2 {
+            color: #673ab7;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media(max-width:600px) {
+            .palette-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .question {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎓 Sudhir Study Hub</h1>
+        <p>Online Objective Question Competition</p>
+    </div>
+
+    <div id="lockedBefore" class="locked">
+        <h2>🔒 Test Not Started</h2>
+        <p>Competition Test will start on:</p>
+        <h3>📅 4 October 2026</h3>
+        <h3>⏰ 1:10 PM</h3>
+        <p>Please come back at the scheduled time.</p>
+    </div>
+
+    <div id="lockedAfter" class="locked hidden">
+        <h2>🔒 Test Closed</h2>
+        <p>The competition test has ended.</p>
+    </div>
+
+    <div id="testArea" class="container hidden">
+
+        <div class="topbar">
+            <div>
+                <b>Participant:</b>
+                <span id="studentName"></span>
+            </div>
+
+            <div>
+                <b>Question:</b>
+                <span id="questionNumber"></span>/50
+            </div>
+
+            <div class="timer">
+                ⏱️ <span id="timer">60:00</span>
+            </div>
+        </div>
+
+        <div class="question-box">
+
+            <div id="subject" class="subject"></div>
+
+            <div id="question" class="question"></div>
+
+            <div id="options"></div>
+
+            <div class="buttons">
+                <button class="prev" onclick="previousQuestion()">
+                    ◀ Previous
+                </button>
+
+                <button class="next" onclick="saveNext()">
+                    Save & Next ▶
+                </button>
+
+                <button class="review" onclick="markReview()">
+                    ⭐ Mark for Review
+                </button>
+
+                <button class="clear" onclick="clearResponse()">
+                    ✖ Clear Response
+                </button>
+
+                <button class="submit" onclick="submitTest()">
+                    ✅ Submit Test
+                </button>
+            </div>
+
+        </div>
+
+        <div class="palette">
+
+            <h3>Question Palette</h3>
+
+            <div id="paletteGrid" class="palette-grid"></div>
+
+            <div class="legend">
+                <span class="l-green">Answered</span>
+                <span class="l-white">Not Answered</span>
+                <span class="l-yellow">Marked for Review</span>
+                <span class="l-purple">Answered + Review</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* =========================
+           TEST DATE & TIME
+        ========================= */
+
+        var TEST_START =
+            new Date("2026-10-04T13:10:00+05:30").getTime();
+
+        var TEST_END =
+            new Date("2026-10-04T14:10:00+05:30").getTime();
+
+
+        /* =========================
+           QUESTIONS
+        ========================= */
+
+        var data = `
+Current Affairs|INS Taragiri was commissioned at which place?|Mumbai|Chennai|Visakhapatnam|Kochi|C
+Current Affairs|ASISSE was launched by which organization?|National Statistics Office|ISRO|RBI|DRDO|A
+Current Affairs|Carlos Alcaraz is associated with which sport?|Football|Tennis|Cricket|Hockey|B
+Current Affairs|Which airport is highly ranked for passenger experience?|Singapore Changi Airport|Delhi Airport|Heathrow Airport|Dubai Airport|A
+Current Affairs|Which is the central bank of India?|SBI|SEBI|NABARD|RBI|D
+Current Affairs|Which of these is a co-operative bank?|Saraswat Co-operative Bank|SBI|HDFC Bank|Bank of Baroda|A
+Current Affairs|America is commonly known as which country?|United States|Canada|Mexico|Brazil|A
+Current Affairs|C-DAC has a major centre in which city?|Delhi|Mumbai|Hyderabad|Jaipur|C
+Current Affairs|Priti Saran was associated with which organization?|United Nations|WHO|UNICEF|WTO|A
+Current Affairs|Which ministry deals with youth affairs and sports?|Ministry of Youth Affairs and Sports|Ministry of Education|Ministry of Home Affairs|Ministry of Defence|A
+
+GK|What is the capital of India?|Mumbai|New Delhi|Kolkata|Chennai|B
+GK|What is the national animal of India?|Lion|Elephant|Tiger|Leopard|C
+GK|Which planet is called the Red Planet?|Earth|Mars|Venus|Jupiter|B
+GK|Who was the Chairman of the Drafting Committee of the Indian Constitution?|Rajendra Prasad|Jawaharlal Nehru|Dr B R Ambedkar|Sardar Patel|C
+GK|Which is the largest ocean?|Indian Ocean|Atlantic Ocean|Arctic Ocean|Pacific Ocean|D
+GK|What is the chemical formula of water?|CO2|O2|H2O|NaCl|C
+GK|The Taj Mahal is located in which city?|Delhi|Agra|Jaipur|Lucknow|B
+GK|What is the national bird of India?|Sparrow|Peacock|Eagle|Parrot|B
+GK|How many continents are there?|5|6|7|8|C
+GK|Which is the largest planet in our Solar System?|Earth|Saturn|Jupiter|Mars|C
+
+Maths|90 degrees is equal to?|π|π/2|2π|π/4|B
+Maths|What is √25?|3|5|7|10|B
+Maths|What is 20% of 1000?|100|150|200|250|C
+Maths|What is 25 + 5 × 1?|25|30|35|40|B
+Maths|20 is what percent of 100?|10%|15%|20%|25%|C
+Maths|What is 6 × 4?|18|20|24|30|C
+Maths|What is 25% of ₹3200?|₹600|₹700|₹800|₹900|C
+Maths|A car travels 120 km in 2 hours. What is its speed?|40 km/h|50 km/h|60 km/h|80 km/h|C
+Maths|What is 7 × 3?|18|20|21|24|C
+Maths|A square has perimeter 40 cm. What is the side length?|5 cm|10 cm|15 cm|20 cm|B
+
+Physics|What is the SI unit of force?|Joule|Newton|Watt|Pascal|B
+Physics|60 km/h is approximately equal to?|10 m/s|16.67 m/s|20 m/s|30 m/s|B
+Physics|Newton's Third Law states?|Law of inertia|F = ma|Action and reaction|Law of gravitation|C
+Physics|If the length of a resistance wire increases, its resistance?|Decreases|Increases|Becomes zero|Remains same|B
+Physics|Energy stored in a stretched spring is?|Kinetic energy|Chemical energy|Elastic potential energy|Nuclear energy|C
+Physics|Acceleration due to gravity on Earth is approximately?|5.8 m/s²|9.8 m/s²|12.8 m/s²|15 m/s²|B
+Physics|Myopia is corrected using which lens?|Convex lens|Concave lens|Cylindrical lens|Plane lens|B
+Physics|If resistance increases at constant voltage, current?|Increases|Decreases|Remains same|Becomes infinite|B
+Physics|1 kWh is equal to?|100 Wh|500 Wh|1000 Wh|10,000 Wh|C
+Physics|Why does a ship float on water?|It contains air and displaces sufficient water|It has no mass|Water has no pressure|It is always hollow|B
+
+Chemistry|Which is the lightest element?|Oxygen|Hydrogen|Carbon|Helium|B
+Chemistry|What is the pH of a neutral solution?|5|6|7|9|C
+Chemistry|Which is a strong acid?|HCl|CH3COOH|H2O|NH4OH|B
+Chemistry|What is the chemical formula of baking soda?|NaCl|NaHCO3|NaOH|CaCO3|B
+Chemistry|During electrolysis of brine, which gas is produced at the anode?|Oxygen|Hydrogen|Chlorine|Nitrogen|C
+Chemistry|Which gas is released during respiration?|Oxygen|Hydrogen|Carbon dioxide|Nitrogen|C
+Chemistry|Two substances combine to form one product. This is called?|Decomposition reaction|Displacement reaction|Combination reaction|Neutralization reaction|C
+Chemistry|Which metal is liquid at room temperature?|Iron|Mercury|Copper|Aluminium|B
+Chemistry|What is the valency of oxygen?|1|2|3|4|B
+Chemistry|Rusting occurs mainly in?|Gold|Silver|Iron|Copper|C
+`;
+
+
+        /* =========================
+           QUESTION PARSING
+        ========================= */
+
+        var lines = data.trim().split("\n").filter(function (line) {
+            return line.trim() !== "";
+        });
+
+        var questions = [];
+
+        for (var i = 0; i < lines.length; i++) {
+
+            var parts = lines[i].split("|");
+
+            questions.push({
+                subject: parts[0],
+                question: parts[1],
+                options: [
+                    parts[2],
+                    parts[3],
+                    parts[4],
+                    parts[5]
+                ],
+                answer: parts[6]
+            });
+        }
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        var currentQuestion = 0;
+
+        var answers = new Array(50).fill("");
+
+        var review = new Array(50).fill(false);
+
+        var secondsLeft = 3600;
+
+        var timerInterval;
+
+
+        /* =========================
+           STUDENT NAME
+        ========================= */
+
+        document.getElementById("studentName").innerHTML =
+            localStorage.getItem("studentName") || "Participant";
+
+
+        /* =========================
+           DATE/TIME CHECK
+        ========================= */
+
+        function checkTestTime() {
+
+            var now = new Date().getTime();
+
+            if (now < TEST_START) {
+
+                document.getElementById("lockedBefore")
+                    .classList.remove("hidden");
+
+                document.getElementById("lockedAfter")
+                    .classList.add("hidden");
+
+                document.getElementById("testArea")
+                    .classList.add("hidden");
+
+            }
+            else if (now >= TEST_END) {
+
+                document.getElementById("lockedBefore")
+                    .classList.add("hidden");
+
+                document.getElementById("lockedAfter")
+                    .classList.remove("hidden");
+
+                document.getElementById("testArea")
+                    .classList.add("hidden");
+
+            }
+            else {
+
+                document.getElementById("lockedBefore")
+                    .classList.add("hidden");
+
+                document.getElementById("lockedAfter")
+                    .classList.add("hidden");
+
+                document.getElementById("testArea")
+                    .classList.remove("hidden");
+
+                if (!timerInterval) {
+                    startTimer();
+                }
+
+                showQuestion();
+
+            }
+        }
+
+
+        /* =========================
+           SHOW QUESTION
+        ========================= */
+
+        function showQuestion() {
+
+            var q = questions[currentQuestion];
+
+            document.getElementById("questionNumber").innerHTML =
+                currentQuestion + 1;
+
+            document.getElementById("subject").innerHTML =
+                q.subject;
+
+            document.getElementById("question").innerHTML =
+                (currentQuestion + 1) + ". " + q.question;
+
+            var html = "";
+
+            for (var i = 0; i < 4; i++) {
+
+                var letter = String.fromCharCode(65 + i);
+
+                var checked =
+                    answers[currentQuestion] === letter
+                        ? "checked"
+                        : "";
+
+                html += `
+        <label class="option">
+            <input type="radio"
+                   name="answer"
+                   value="${letter}"
+                   ${checked}
+                   onchange="selectAnswer('${letter}')">
+            <b>${letter}.</b> ${q.options[i]}
+        </label>
+        `;
+            }
+
+            document.getElementById("options").innerHTML =
+                html;
+
+            updatePalette();
+        }
+
+
+        /* =========================
+           SELECT ANSWER
+        ========================= */
+
+        function selectAnswer(letter) {
+
+            answers[currentQuestion] = letter;
+
+            updatePalette();
+        }
+
+
+        /* =========================
+           SAVE & NEXT
+        ========================= */
+
+        function saveNext() {
+
+            if (currentQuestion < 49) {
+
+                currentQuestion++;
+
+                showQuestion();
+
+            }
+        }
+
+
+        /* =========================
+           PREVIOUS
+        ========================= */
+
+        function previousQuestion() {
+
+            if (currentQuestion > 0) {
+
+                currentQuestion--;
+
+                showQuestion();
+
+            }
+        }
+
+
+        /* =========================
+           MARK FOR REVIEW
+        ========================= */
+
+        function markReview() {
+
+            review[currentQuestion] =
+                !review[currentQuestion];
+
+            updatePalette();
+        }
+
+
+        /* =========================
+           CLEAR RESPONSE
+        ========================= */
+
+        function clearResponse() {
+
+            answers[currentQuestion] = "";
+
+            showQuestion();
+        }
+
+
+        /* =========================
+           QUESTION PALETTE
+        ========================= */
+
+        function updatePalette() {
+
+            var html = "";
+
+            for (var i = 0; i < 50; i++) {
+
+                var cls = "notanswered";
+
+                if (answers[i] !== "" && review[i]) {
+                    cls = "answeredReview";
+                }
+                else if (review[i]) {
+                    cls = "reviewed";
+                }
+                else if (answers[i] !== "") {
+                    cls = "answered";
+                }
+
+                html += `
+        <button
+            class="qbtn ${cls}"
+            onclick="goToQuestion(${i})">
+            ${i + 1}
+        </button>
+        `;
+            }
+
+            document.getElementById("paletteGrid").innerHTML =
+                html;
+        }
+
+
+        /* =========================
+           GO TO QUESTION
+        ========================= */
+
+        function goToQuestion(number) {
+
+            currentQuestion = number;
+
+            showQuestion();
+        }
+
+
+        /* =========================
+           TIMER
+        ========================= */
+
+        function startTimer() {
+
+            timerInterval = setInterval(function () {
+
+                secondsLeft--;
+
+                updateTimer();
+
+                var now = new Date().getTime();
+
+                if (secondsLeft <= 0 || now >= TEST_END) {
+
+                    clearInterval(timerInterval);
+
+                    submitTest();
+
+                }
+
+            }, 1000);
+
+            updateTimer();
+        }
+
+
+        function updateTimer() {
+
+            var minutes =
+                Math.floor(secondsLeft / 60);
+
+            var seconds =
+                secondsLeft % 60;
+
+            document.getElementById("timer").innerHTML =
+                String(minutes).padStart(2, "0")
+                + ":"
+                + String(seconds).padStart(2, "0");
+        }
+
+
+        /* =========================
+           SUBMIT TEST
+        ========================= */
+
+        function submitTest() {
+
+            if (localStorage.getItem("testSubmitted") === "true") {
+                return;
+            }
+
+            var confirmSubmit =
+                confirm(
+                    "Are you sure you want to submit the test?"
+                );
+
+            if (!confirmSubmit) {
+                return;
+            }
+
+            var correct = 0;
+            var wrong = 0;
+
+            for (var i = 0; i < questions.length; i++) {
+
+                if (answers[i] === "") {
+                    continue;
+                }
+
+                if (answers[i] === questions[i].answer) {
+                    correct++;
+                }
+                else {
+                    wrong++;
+                }
+            }
+
+            var score =
+                (correct * 4) - wrong;
+
+            localStorage.setItem(
+                "studentScore",
+                score
+            );
+
+            localStorage.setItem(
+                "correctAnswers",
+                correct
+            );
+
+            localStorage.setItem(
+                "wrongAnswers",
+                wrong
+            );
+
+            localStorage.setItem(
+                "testSubmitted",
+                "true"
+            );
+
+            localStorage.setItem(
+                "testAnswers",
+                JSON.stringify(answers)
+            );
+
+            localStorage.setItem(
+                "testReview",
+                JSON.stringify(review)
+            );
+
+            window.location.href =
+                "feedback.html";
+        }
+
+
+        /* =========================
+           START CHECK
+        ========================= */
+
+        checkTestTime();
+
+        setInterval(checkTestTime, 1000);
+
+    </script>
+
+</body>
+
+</html>
