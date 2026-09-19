@@ -95,6 +95,11 @@
             background: #0d4f80;
         }
 
+        button:disabled {
+            background: #888;
+            cursor: not-allowed;
+        }
+
         .success {
             display: none;
             margin-top: 25px;
@@ -135,24 +140,30 @@
             font-size: 14px;
             margin-top: 15px;
         }
+
+        .warning {
+            display: none;
+            background: #ffebee;
+            border: 1px solid #e53935;
+            color: #b71c1c;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 
-
 <body>
-
 
     <div class="header">
         <h1>🎓 Sudhir Study Hub</h1>
     </div>
-
 
     <div class="container">
 
         <div class="card">
 
             <h2>📝 Online Objective Question Competition</h2>
-
 
             <div class="info">
 
@@ -179,70 +190,71 @@
 
             <form id="registrationForm">
 
-                <label>
-                    Student Name
-                </label>
+                <!-- STUDENT NAME -->
+
+                <label>Student Name</label>
 
                 <input type="text" id="studentName" placeholder="Enter student name" required>
 
 
-                <label>
-                    Father's Name
-                </label>
+                <!-- FATHER NAME -->
+
+                <label>Father's Name</label>
 
                 <input type="text" id="fatherName" placeholder="Enter father's name" required>
 
 
-                <label>
-                    Current Education
-                </label>
+                <!-- EDUCATION -->
+
+                <label>Current Education</label>
 
                 <input type="text" id="education" placeholder="Example: B.Tech CSE" required>
 
 
-                <label>
-                    Paper Language
-                </label>
+                <!-- MOBILE -->
 
-                <select id="language" required>
+                <label>Mobile Number</label>
 
-                    <option value="">
-                        Select Language
-                    </option>
-
-                    <option value="English">
-                        English
-                    </option>
-
-                    <option value="Hindi">
-                        Hindi
-                    </option>
-
-                </select>
+                <input type="tel" id="mobile" placeholder="Enter 10 digit mobile number" maxlength="10"
+                    inputmode="numeric" required>
 
 
-                <label>
-                    Mobile Number
-                </label>
+                <!-- EMAIL -->
 
-                <input type="tel" id="mobile" placeholder="Enter mobile number" maxlength="10" required>
-
-
-                <label>
-                    Email Address
-                </label>
+                <label>Email Address</label>
 
                 <input type="email" id="email" placeholder="Enter email address" required>
 
 
-                <button type="submit">
+                <!-- LANGUAGE -->
+
+                <label>Paper Language</label>
+
+                <select id="language" required>
+
+                    <option value="">Select Paper Language</option>
+
+                    <option value="English">English</option>
+
+                    <option value="Hindi">Hindi</option>
+
+                </select>
+
+
+                <div class="warning" id="warningBox">
+                </div>
+
+
+                <button type="submit" id="registerButton">
+
                     📝 Register for Competition
+
                 </button>
 
             </form>
 
 
-            <!-- SUCCESS BOX -->
+            <!-- SUCCESS -->
 
             <div class="success" id="successBox">
 
@@ -274,11 +286,11 @@
 
 
                 <p class="note">
-                    Please save your Participant ID and Password.
+
+                    ⚠️ Please save your Participant ID and Password safely.
+
                 </p>
 
-
-                <!-- LOGIN BUTTON -->
 
                 <button class="login-btn" onclick="goToLogin()">
 
@@ -286,94 +298,100 @@
 
                 </button>
 
-
             </div>
-
 
         </div>
 
     </div>
 
 
-
     <script>
+
+        /* ==========================================
+           GOOGLE APPS SCRIPT URL
+        ========================================== */
+
+        var GOOGLE_SHEET_URL =
+            "https://script.google.com/macros/s/AKfycbwV8jZLNRCrm_2xWpRrFtuI_z93Azedvk-01Cf9gooPhqfYk3PeqfTwi7CaQ-MV_REH/exec";
 
 
         /* ==========================================
            REGISTRATION
         ========================================== */
 
-        document.getElementById(
-            "registrationForm"
-        ).addEventListener(
-            "submit",
-            function (event) {
+        document
+            .getElementById("registrationForm")
+            .addEventListener("submit", function (event) {
 
                 event.preventDefault();
 
 
-                /* Student details */
+                /* GET DATA */
 
                 var name =
-                    document.getElementById(
-                        "studentName"
-                    ).value.trim();
+                    document.getElementById("studentName")
+                        .value.trim();
 
 
                 var father =
-                    document.getElementById(
-                        "fatherName"
-                    ).value.trim();
+                    document.getElementById("fatherName")
+                        .value.trim();
 
 
                 var education =
-                    document.getElementById(
-                        "education"
-                    ).value.trim();
-
-
-                var language =
-                    document.getElementById(
-                        "language"
-                    ).value;
+                    document.getElementById("education")
+                        .value.trim();
 
 
                 var mobile =
-                    document.getElementById(
-                        "mobile"
-                    ).value.trim();
+                    document.getElementById("mobile")
+                        .value.trim();
 
 
                 var email =
-                    document.getElementById(
-                        "email"
-                    ).value.trim();
+                    document.getElementById("email")
+                        .value.trim();
 
 
-                /* ======================================
-                   GENERATE PARTICIPANT ID
-                ====================================== */
+                var language =
+                    document.getElementById("language")
+                        .value;
+
+
+                /* MOBILE VALIDATION */
+
+                if (!/^[0-9]{10}$/.test(mobile)) {
+
+                    showWarning(
+                        "Please enter a valid 10-digit mobile number."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ==========================================
+                   PARTICIPANT ID
+                ========================================== */
 
                 var randomNumber =
                     Math.floor(
                         1000 + Math.random() * 9000
                     );
 
-
                 var participantId =
                     "SSH26" + randomNumber;
 
 
-                /* ======================================
-                   GENERATE PASSWORD
-                ====================================== */
+                /* ==========================================
+                   PASSWORD
+                ========================================== */
 
                 var characters =
                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-
                 var password = "";
-
 
                 for (
                     var i = 0;
@@ -384,17 +402,16 @@
                     password +=
                         characters.charAt(
                             Math.floor(
-                                Math.random() *
-                                characters.length
+                                Math.random() * characters.length
                             )
                         );
 
                 }
 
 
-                /* ======================================
-                   SAVE DATA
-                ====================================== */
+                /* ==========================================
+                   LOCAL STORAGE
+                ========================================== */
 
                 localStorage.setItem(
                     "studentName",
@@ -412,11 +429,6 @@
                 );
 
                 localStorage.setItem(
-                    "language",
-                    language
-                );
-
-                localStorage.setItem(
                     "mobile",
                     mobile
                 );
@@ -424,6 +436,11 @@
                 localStorage.setItem(
                     "email",
                     email
+                );
+
+                localStorage.setItem(
+                    "language",
+                    language
                 );
 
                 localStorage.setItem(
@@ -437,46 +454,177 @@
                 );
 
 
-                /* ======================================
-                   SHOW ID & PASSWORD
-                ====================================== */
+                /* ==========================================
+                   GOOGLE SHEET DATA
+                ========================================== */
 
-                document.getElementById(
-                    "participantId"
-                ).innerText =
-                    participantId;
+                var formData =
+                    new URLSearchParams();
 
 
-                document.getElementById(
-                    "participantPassword"
-                ).innerText =
-                    password;
-
-
-                document.getElementById(
-                    "successBox"
-                ).style.display =
-                    "block";
-
-
-                document.getElementById(
-                    "registrationForm"
-                ).style.display =
-                    "none";
-
-
-                window.scrollTo(
-                    0,
-                    document.body.scrollHeight
+                formData.append(
+                    "studentName",
+                    name
                 );
 
-            }
-        );
+                formData.append(
+                    "fatherName",
+                    father
+                );
 
+                formData.append(
+                    "education",
+                    education
+                );
+
+                formData.append(
+                    "mobile",
+                    mobile
+                );
+
+                formData.append(
+                    "email",
+                    email
+                );
+
+                formData.append(
+                    "participantId",
+                    participantId
+                );
+
+                formData.append(
+                    "status",
+                    "Registered"
+                );
+
+                formData.append(
+                    "score",
+                    ""
+                );
+
+                formData.append(
+                    "correct",
+                    ""
+                );
+
+                formData.append(
+                    "wrong",
+                    ""
+                );
+
+                formData.append(
+                    "language",
+                    language
+                );
+
+
+                /* ==========================================
+                   DISABLE BUTTON
+                ========================================== */
+
+                var button =
+                    document.getElementById(
+                        "registerButton"
+                    );
+
+                button.disabled = true;
+
+                button.innerText =
+                    "⏳ Registering...";
+
+
+                /* ==========================================
+                   SEND TO GOOGLE SHEET
+                ========================================== */
+
+                fetch(
+                    GOOGLE_SHEET_URL,
+                    {
+                        method: "POST",
+                        mode: "no-cors",
+                        body: formData
+                    }
+                )
+
+                    .then(function () {
+
+                        showRegistrationSuccess();
+
+                    })
+
+                    .catch(function (error) {
+
+                        console.log(error);
+
+                        showRegistrationSuccess();
+
+                    });
+
+            });
 
 
         /* ==========================================
-           LOGIN BUTTON
+           SUCCESS MESSAGE
+        ========================================== */
+
+        function showRegistrationSuccess() {
+
+            document.getElementById(
+                "participantId"
+            ).innerText =
+                localStorage.getItem(
+                    "participantId"
+                );
+
+
+            document.getElementById(
+                "participantPassword"
+            ).innerText =
+                localStorage.getItem(
+                    "participantPassword"
+                );
+
+
+            document.getElementById(
+                "successBox"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "registrationForm"
+            ).style.display =
+                "none";
+
+
+            window.scrollTo(
+                0,
+                document.body.scrollHeight
+            );
+
+        }
+
+
+        /* ==========================================
+           WARNING
+        ========================================== */
+
+        function showWarning(message) {
+
+            var box =
+                document.getElementById(
+                    "warningBox"
+                );
+
+            box.innerText = message;
+
+            box.style.display = "block";
+
+        }
+
+
+        /* ==========================================
+           LOGIN
         ========================================== */
 
         function goToLogin() {
@@ -487,7 +635,6 @@
         }
 
     </script>
-
 
 </body>
 
